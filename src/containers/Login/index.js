@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 
 import LoginImg from '../../assets/loginImage.svg'
 import Logo from '../../assets/logoBurger.svg'
-import { Button } from '../../components'
+import { Button, ErrorMessage } from '../../components'
 import { useUser } from '../../hooks/UserContext'
 import api from '../../services/api'
 import {
@@ -16,8 +16,7 @@ import {
   ContainerItens,
   Label,
   Input,
-  SigninLink,
-  ErrorMensage
+  SigninLink
 } from './styles'
 
 export function Login() {
@@ -56,7 +55,6 @@ export function Login() {
     )
 
     putUserData(data)
-    console.log(data)
 
     setTimeout(() => {
       if (data.admin) {
@@ -81,7 +79,7 @@ export function Login() {
             {...register('email')}
             error={errors.email?.message}
           />
-          <ErrorMensage>{errors.email?.message}</ErrorMensage>
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
           <Label>Senha</Label>
           <Input
@@ -89,7 +87,7 @@ export function Login() {
             {...register('password')}
             error={errors.password?.message}
           />
-          <ErrorMensage>{errors.password?.message}</ErrorMensage>
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
           <Button type="submit" style={{ marginTop: 75, marginBottom: 25 }}>
             Entrar

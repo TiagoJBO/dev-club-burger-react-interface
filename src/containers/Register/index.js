@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 
 import RegisterImg from '../../assets/burgerRegister.svg'
 import Logo from '../../assets/logoBurger.svg'
-import { Button } from '../../components'
+import { Button, ErrorMessage } from '../../components'
 import api from '../../services/api'
 import {
   Container,
@@ -15,8 +15,7 @@ import {
   ContainerItens,
   Label,
   Input,
-  SigninLink,
-  ErrorMensage
+  SigninLink
 } from './styles'
 
 export function Register() {
@@ -79,14 +78,14 @@ export function Register() {
             {...register('name')}
             error={errors.name?.message}
           />
-          <ErrorMensage>{errors.name?.message}</ErrorMensage>
+          <ErrorMessage>{errors.name?.message}</ErrorMessage>
           <Label error={errors.email?.message}> Email</Label>
           <Input
             type="text"
             {...register('email')}
             error={errors.email?.message}
           />
-          <ErrorMensage>{errors.email?.message}</ErrorMensage>
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
           <Label error={errors.password?.message}>Senha</Label>
           <Input
@@ -94,7 +93,7 @@ export function Register() {
             {...register('password')}
             error={errors.password?.message}
           />
-          <ErrorMensage>{errors.password?.message}</ErrorMensage>
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
           <Label error={errors.confirmPassword?.message}>
             Confirme a senha
           </Label>
@@ -103,7 +102,7 @@ export function Register() {
             {...register('confirmPassword')}
             error={errors.confirmPassword?.message}
           />
-          <ErrorMensage>{errors.confirmPassword?.message}</ErrorMensage>
+          <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
 
           <Button type="submit" style={{ marginTop: 7, marginBottom: 1 }}>
             Cadastrar

@@ -74,11 +74,3 @@ export const SigninLink = styled.p`
     margin-bottom: 100px;
   }
 `
-export const ErrorMensage = styled.p`
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.41px;
-  text-align: left;
-  color: #cc1717;
-  margin-top: 5px;
-`
