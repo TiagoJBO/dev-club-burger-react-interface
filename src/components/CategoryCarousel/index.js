@@ -9,11 +9,11 @@ export function CategoryCarousel() {
   const [categories, setCategories] = useState([])
   useEffect(() => {
     async function loadCategories() {
-      const { data } = await api.get('Categories')
+      const { data } = await api.get('categories')
 
       setCategories(data)
     }
-    loadCategories([])
+    loadCategories()
   }, [])
 
   const breakPoints = [

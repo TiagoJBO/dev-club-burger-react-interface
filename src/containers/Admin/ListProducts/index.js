@@ -8,10 +8,10 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import path from '../../../constants/paths'
-import Api from '../../../services/api'
+import api from '../../../services/api'
 import FormatCurrency from '../../../Utils/formatCurrency'
 import { Container, Img, IconEdit } from './styles'
 
@@ -21,7 +21,7 @@ function ListProducts() {
 
   useEffect(() => {
     async function loadOrders() {
-      const { data } = await Api.get('products')
+      const { data } = await api.get('products')
 
       setProducts(data)
     }

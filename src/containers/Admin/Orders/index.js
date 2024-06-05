@@ -15,7 +15,7 @@ import Row from './row'
 import { Container, Menu, LinkMenu } from './styles'
 
 function Orders() {
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState([0])
   const [filteredOrders, setFilteredOrders] = useState([])
   const [activeStatus, setactiveStatus] = useState(1)
   const [rows, setRows] = useState([])
@@ -31,7 +31,7 @@ function Orders() {
   }, [])
   function createData(order) {
     return {
-      name: order.user.name,
+      name: order.name,
       orderId: order.id,
       date: formatDate(order.createdAt),
       status: order.status,
