@@ -31,7 +31,7 @@ function Orders() {
   }, [])
   function createData(order) {
     return {
-      name: order.name,
+      name: order.user.name,
       orderId: order.id,
       date: formatDate(order.createdAt),
       status: order.status,
