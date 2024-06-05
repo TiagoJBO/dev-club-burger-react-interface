@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-elastic-carousel'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory } from 'react-router-dom'
 
 import Offers from '../../assets/offers.png'
 import { useCart } from '../../hooks/CartContext'
