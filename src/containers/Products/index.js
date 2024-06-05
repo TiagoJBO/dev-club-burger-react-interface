@@ -19,22 +19,23 @@ export function Products({ location: { state } }) {
     categoryId = state.categoryId
   }
 
-  const [categories, setCategories] = useState([])
-  const [products, setProducts] = useState([])
-  const [filteredProduct, setFilteredProducts] = useState([])
+  const [categories, setCategories] = useState()
+  const [products, setProducts] = useState()
+  const [filteredProduct, setFilteredProducts] = useState()
   const [activeCategory, setctiveCategories] = useState(categoryId)
 
   useEffect(() => {
     async function loadCategories() {
-      const { data } = await api.get('categories')
+      const { data } = await api.get('Categories')
 
       const newCategories = [{ id: 0, name: 'Todas' }, ...data]
 
       setCategories(newCategories)
     }
+    loadCategories()
 
     async function loadProducts() {
-      const { data: allProducts } = await api.get('products')
+      const { data: allProducts } = await api.get('Products')
 
       const newProducts = allProducts.map((product) => {
         return { ...product, formatedPrice: formatCurrency(product.price) }
@@ -42,8 +43,8 @@ export function Products({ location: { state } }) {
 
       setProducts(newProducts)
     }
+
     loadProducts()
-    loadCategories()
   }, [])
 
   useEffect(() => {

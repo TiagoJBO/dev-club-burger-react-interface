@@ -9,24 +9,30 @@ import * as Yup from 'yup'
 
 import { ErrorMessageStyles } from '../../../components/ErrorMessage/styles'
 import Api from '../../../services/api'
-import { Container, Label, Input, Buttonstyles, LabelUploads } from './styles'
+import {
+  Container,
+  Label,
+  Input,
+  Buttonstyles,
+  LabelUploads,
+  ContainerInput
+} from './styles'
 
-function NewProduct() {
+function EditProduct() {
   const [fileName, setFileName] = useState(null)
   const [categories, setCategories] = useState([])
-  const { push } = useHistory()
+  const {
+    push,
+    location: {
+      state: { product }
+    }
+  } = useHistory()
 
   const schema = Yup.object().shape({
     name: Yup.string().required('Digite o nome do produto'),
     price: Yup.string().required('Digite o preço do produto'),
     category: Yup.object().required('Escolha uma categoria'),
-    file: Yup.mixed()
-      .test('required', 'Carregue um arquivo', (value) => {
-        return value?.length > 0
-      })
-      .test('fileSize', 'Carregue arquivo de até 2mb', (value) => {
-        return value[0]?.size <= 200000
-      })
+    offer: Yup.bool()
   })
   const {
     register,
@@ -42,12 +48,16 @@ function NewProduct() {
     productDataFormData.append('price', data.price)
     productDataFormData.append('category_id', data.category.id)
     productDataFormData.append('file', data.file[0])
+    productDataFormData.append('offer', data.offer)
 
-    await toast.promise(Api.post('products', productDataFormData), {
-      pending: 'Criando novo produto...',
-      success: 'Produto criado com sucesso ',
-      error: 'Falha ao criar o produto'
-    })
+    await toast.promise(
+      Api.put(`products/${product.id}`, productDataFormData),
+      {
+        pending: 'Editando novo produto...',
+        success: 'Produto editado com sucesso ',
+        error: 'Falha ao editar o produto'
+      }
+    )
     setTimeout(() => {
       push('/listar-produtos')
     }, 2000)
@@ -67,13 +77,21 @@ function NewProduct() {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label>Nome</Label>
-          <Input type="text" {...register('name')} />
+          <Input
+            type="text"
+            {...register('name')}
+            defaultValue={product.name}
+          />
           <ErrorMessageStyles>{errors.name?.message}</ErrorMessageStyles>
         </div>
 
         <div>
           <Label>Preço</Label>
-          <Input type="number" {...register('price')} />
+          <Input
+            type="number"
+            {...register('price')}
+            defaultValue={product.price}
+          />
           <ErrorMessageStyles>{errors.price?.message}</ErrorMessageStyles>
         </div>
 
@@ -100,6 +118,7 @@ function NewProduct() {
           <Controller
             name="category"
             control={control}
+            defaultValue={product.category}
             render={({ field }) => {
               return (
                 <ReactSelect
@@ -108,6 +127,7 @@ function NewProduct() {
                   getOptionLabel={(cat) => cat.name}
                   getOptionValue={(cat) => cat.id}
                   placeholder="Categorias"
+                  defaultValue={product.category}
                 />
               )
             }}
@@ -115,9 +135,18 @@ function NewProduct() {
           <ErrorMessageStyles>{errors.category?.message}</ErrorMessageStyles>
         </div>
 
-        <Buttonstyles>Adicionar produtos</Buttonstyles>
+        <ContainerInput>
+          <input
+            type="checkbox"
+            {...register('offer')}
+            defaultChecked={product.offer}
+          />
+          <Label>Produto em oferta?</Label>
+        </ContainerInput>
+
+        <Buttonstyles>Editar produtos</Buttonstyles>
       </form>
     </Container>
   )
 }
-export default NewProduct
+export default EditProduct
