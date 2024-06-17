@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-elastic-carousel'
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import Offers from '../../assets/offers.png'
 import { useCart } from '../../hooks/CartContext'
@@ -15,7 +15,7 @@ export function OffersCarousel() {
 
   useEffect(() => {
     async function loadOffers() {
-      const { data } = await api.get('Products')
+      const { data } = await api.get('products')
 
       const onlyOffers = data
         .filter((product) => product.offer)

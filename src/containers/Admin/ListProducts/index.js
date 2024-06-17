@@ -8,20 +8,16 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 
-import path from '../../../constants/paths'
-import api from '../../../services/api'
+import Api from '../../../services/api'
 import FormatCurrency from '../../../Utils/formatCurrency'
 import { Container, Img, IconEdit } from './styles'
 
 function ListProducts() {
   const [products, setProducts] = useState()
-  const { push } = useHistory()
-
   useEffect(() => {
     async function loadOrders() {
-      const { data } = await api.get('products')
+      const { data } = await Api.get('products')
 
       setProducts(data)
     }
@@ -34,10 +30,6 @@ function ListProducts() {
     }
     return <CancelIcon style={{ color: '#CC1717' }} />
   }
-  function editProduct(product) {
-    push(path.EditProduct, { product })
-  }
-
   return (
     <Container>
       <TableContainer component={Paper}>
@@ -67,7 +59,7 @@ function ListProducts() {
                     <Img src={product.url} alt="imagens-produto" />
                   </TableCell>
                   <TableCell>
-                    <IconEdit onClick={() => editProduct(product)} />
+                    <IconEdit />
                   </TableCell>
                 </TableRow>
               ))}

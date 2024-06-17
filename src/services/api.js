@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiDevBurger = axios.create({
-  baseURL: 'https://dev-club-burger-production-4908.up.railway.app/'
+  baseURL: 'http://localhost:3001'
 })
 apiDevBurger.interceptors.request.use(async (config) => {
   const userData = await localStorage.getItem('devburger:userData')

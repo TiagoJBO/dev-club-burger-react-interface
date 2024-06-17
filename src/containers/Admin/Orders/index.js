@@ -1,4 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import Box from '@mui/material/Box'
+import Collapse from '@mui/material/Collapse'
+import IconButton from '@mui/material/IconButton'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -6,6 +10,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import Typography from '@mui/material/Typography'
 import React, { useEffect, useState } from 'react'
 
 import api from '../../../services/api'
@@ -15,7 +20,7 @@ import Row from './row'
 import { Container, Menu, LinkMenu } from './styles'
 
 function Orders() {
-  const [orders, setOrders] = useState([0])
+  const [orders, setOrders] = useState([])
   const [filteredOrders, setFilteredOrders] = useState([])
   const [activeStatus, setactiveStatus] = useState(1)
   const [rows, setRows] = useState([])
@@ -32,7 +37,7 @@ function Orders() {
   function createData(order) {
     return {
       name: order.user.name,
-      orderId: order.id,
+      orderId: order._id,
       date: formatDate(order.createdAt),
       status: order.status,
       products: order.products
