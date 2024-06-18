@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React, { useEffect, useState } from 'react'
+
 import api from '../../../services/api'
 import formatDate from '../../../Utils/formatDate'
 import status from './Order-status'
@@ -27,6 +28,7 @@ function Orders() {
     }
     loadOrders()
   }, [])
+
   function createData(order) {
     return {
       name: order.user.name,
@@ -51,7 +53,7 @@ function Orders() {
       )
       setFilteredOrders(newFilteredOrders)
     }
-  }, [orders])
+  }, [activeStatus, orders])
 
   function handleStatus(status) {
     if (status.id === 1) {

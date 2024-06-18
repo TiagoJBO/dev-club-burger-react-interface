@@ -9,16 +9,17 @@ import formatCurrency from '../../Utils/formatCurrency'
 import { Container, ContainerItens, Image, Button, CategoryImg } from './styles'
 
 export function OffersCarousel() {
-  const [offers, setOffers] = useState([0])
+  const [offers, setOffers] = useState([])
   const { putProductInCart } = useCart()
   const { push } = useHistory()
 
   useEffect(() => {
     async function loadOffers() {
-      const { data } = await api.get('Products')
+      const { data } = await api.get('products')
 
       const onlyOffers = data
-        .filter((product) => product.offer)
+
+        .filter((product) => product.offers)
         .map((product) => {
           return { ...product, formatedPrice: formatCurrency(product.price) }
         })

@@ -56,7 +56,7 @@ function NewProduct() {
   useEffect(() => {
     async function loadCategories() {
       const { data } = await Api.get('categories')
-      console.log(data)
+
       setCategories(data)
     }
     loadCategories()
