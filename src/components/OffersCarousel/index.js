@@ -9,7 +9,7 @@ import formatCurrency from '../../Utils/formatCurrency'
 import { Container, ContainerItens, Image, Button, CategoryImg } from './styles'
 
 export function OffersCarousel() {
-  const [offers, setOffers] = useState([])
+  const [offers, setOffers] = useState([0])
   const { putProductInCart } = useCart()
   const { push } = useHistory()
 
