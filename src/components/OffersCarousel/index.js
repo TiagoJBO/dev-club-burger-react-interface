@@ -15,7 +15,7 @@ export function OffersCarousel() {
 
   useEffect(() => {
     async function loadOffers() {
-      const { data } = await api.get('products')
+      const { data } = await api.get('Products')
 
       const onlyOffers = data
         .filter((product) => product.offer)

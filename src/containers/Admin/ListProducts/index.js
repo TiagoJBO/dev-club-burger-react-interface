@@ -17,7 +17,7 @@ function ListProducts() {
   const [products, setProducts] = useState()
   useEffect(() => {
     async function loadOrders() {
-      const { data } = await Api.get('products')
+      const { data } = await Api.get('Products')
 
       setProducts(data)
     }
